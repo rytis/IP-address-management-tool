@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block contents %}
+{% if parent %}
+    <h1>Current address: {{ parent.address }}/{{ parent.network_size }}</h1>
+    <h2><a href="{% if parent.parent %}{% url networkaddress-display parent.parent %}{% else %}{% url networkaddress-displaytop %}{% endif %}">Go back</a></h2>
+{% else %}
+    <h1>At the top of the networks tree</h1>
+{% endif %}
+
+{% if addresses_list %}
+    <ul>
+    {% for address in addresses_list %}
+        <li><a href="{% url networkaddress-display address %}">{{ address.address }}/{{ address.network_size }}</a>
+            {% ifequal address.network_size 32 %}(host){% else %}(network){% endifequal %}
+            {{ address.description }} {% if address.get_hostname %} ({{ address.get_hostname }}) {% endif %}
+            (<a href="{% url networkaddress-delete address %}">delete</a> |
+            <a href="{% url networkaddress-modify address %}">modify</a>) 
+            {% ifequal address.network_size 32 %}
+            [Status: <span class="address" id="ip_{{ address.get_formated_address }}">Unknown</span> ]
+            {% endifequal %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    {% ifequal parent.network_size 32 %}
+        This is a node IP
+        <ul>
+        <li>Description: {{ parent.description }} ( <a href="{% url networkaddress-modify parent %}">modify</a> )</li>
+        </ul>
+    {% else %}
+        No addresses or subnets in this range
+    {% endifequal %}
+{% endif %}
+
+{% ifnotequal parent.network_size 32 %}
+<h3><a href="{% if parent %}{% url networkaddress-add parent %}{% else %}{% url networkaddress-addtop %}{% endif %}">Add new subnet or node IP</a></h3>
+{% endifnotequal %}
+
+{% if has_subnets %}
+    <h3>DHCP support cannot be enabled for networks with subnets</h3>
+{% else %}
+    {% if dhcp_net %}
+        <h3>DHCP support is enabled for this subnet</h3>
+        <ul>
+        <li>Router: {{ dhcp_net.router }}</li>
+        <li>DNS: {{ dhcp_net.dns_server }}</li>
+        <li>Domain: {{ dhcp_net.domain_name }}</li>
+        </ul>
+        <p>
+        ( <a href="{% url dhcpnetwork-modify dhcp_net %}">modify</a> | <a href="{% url dhcpnetwork-delete dhcp_net %}">delete</a> | <a href="{% url dhcpnetwork-display dhcp_net %}">details</a> )
+        </p>
+    {% else %}
+        {% ifnotequal parent.network_size 32 %}
+            <h3><a href="{% url networkaddress-adddhcp parent %}">Enable DHCP support</a></h3>
+        {% endifnotequal %}
+    {% endif %}
+{% endif %}
+{% endblock %}

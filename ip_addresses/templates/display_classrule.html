@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block contents %}
+{% if object %}
+    <h1>Class Rules details</h1>
+    <ul>
+        <li>ID: {{ object.id }}</li>
+        <li>Description: {{ object.description }}</li>
+        <li>Rule text:
+            <pre>
+                {{ object.rule }}
+            </pre>
+        </li>
+    </ul>
+    ( <a href="{% url classrule-modify object.id %}">modify</a> | 
+      <a href="{% url classrule-delete object.id %}">delete</a> )
+{% else %}
+    <h1>List of all Class Rules</h1>
+    {% if object_list %}
+        <ul>
+        {% for rule in object_list %}
+            <li>{{ rule.description }} ( <a href="{% url classrule-display rule.id %}">details</a> |
+                                         <a href="{% url classrule-modify rule.id %}">modify</a> | 
+                                         <a href="{% url classrule-delete rule.id %}">delete</a> )</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        No class rules defined yet.
+    {% endif %}
+    <h3><a href="{% url classrule-add %}">Add new rule</a></h3>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,205 @@
+
+[
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 1,
+        "fields": {
+            "address":  "192.168.0.0",
+            "network_size": 24,
+            "description": "First top level network"
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 2,
+        "fields": {
+            "address":  "192.168.1.0",
+            "network_size": 24,
+            "description": "Second top level network"
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 3,
+        "fields": {
+            "address":  "192.168.0.0",
+            "network_size": 25,
+            "description": "Subnet 1-1",
+            "parent": 1
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 4,
+        "fields": {
+            "address":  "192.168.0.128",
+            "network_size": 25,
+            "description": "Subnet 1-2",
+            "parent": 1
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 5,
+        "fields": {
+            "address":  "192.168.1.0",
+            "network_size": 26,
+            "description": "Subnet 2-1",
+            "parent": 2
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 6,
+        "fields": {
+            "address":  "192.168.1.64",
+            "network_size": 26,
+            "description": "Subnet 2-2",
+            "parent": 2
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 7,
+        "fields": {
+            "address":  "192.168.1.128",
+            "network_size": 26,
+            "description": "Subnet 2-3",
+            "parent": 2
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 8,
+        "fields": {
+            "address":  "192.168.1.192",
+            "network_size": 26,
+            "description": "Subnet 2-4",
+            "parent": 2
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 9,
+        "fields": {
+            "address":  "192.168.0.1",
+            "network_size": 32,
+            "description": "IP 1 in Subnet 1-1",
+            "parent": 3
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 10,
+        "fields": {
+            "address":  "192.168.0.2",
+            "network_size": 32,
+            "description": "IP 2 in Subnet 1-1",
+            "parent": 3
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 11,
+        "fields": {
+            "address":  "192.168.0.129",
+            "network_size": 32,
+            "description": "IP 1 in Subnet 1-2",
+            "parent": 4
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 12,
+        "fields": {
+            "address":  "192.168.0.130",
+            "network_size": 32,
+            "description": "IP 2 in Subnet 1-2",
+            "parent": 4
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 13,
+        "fields": {
+            "address":  "192.168.1.1",
+            "network_size": 32,
+            "description": "IP 1 in Subnet 2-1",
+            "parent": 5
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 14,
+        "fields": {
+            "address":  "192.168.1.2",
+            "network_size": 32,
+            "description": "IP 2 in Subnet 2-1",
+            "parent": 5
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 15,
+        "fields": {
+            "address":  "192.168.1.65",
+            "network_size": 32,
+            "description": "IP 1 in Subnet 2-2",
+            "parent": 6
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 16,
+        "fields": {
+            "address":  "192.168.1.66",
+            "network_size": 32,
+            "description": "IP 2 in Subnet 2-2",
+            "parent": 6
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 17,
+        "fields": {
+            "address":  "192.168.1.129",
+            "network_size": 32,
+            "description": "IP 1 in Subnet 2-3",
+            "parent": 7
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 18,
+        "fields": {
+            "address":  "192.168.1.130",
+            "network_size": 32,
+            "description": "IP 2 in Subnet 2-3",
+            "parent": 7
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 19,
+        "fields": {
+            "address":  "192.168.1.193",
+            "network_size": 32,
+            "description": "IP 1 in Subnet 2-4",
+            "parent": 8
+        }
+    },
+    {
+        "model":  "ip_addresses.networkaddress",
+        "pk": 20,
+        "fields": {
+            "address":  "192.168.1.194",
+            "network_size": 32,
+            "description": "IP 2 in Subnet 2-4",
+            "parent": 8
+        }
+    }
+
+
+
+
+]

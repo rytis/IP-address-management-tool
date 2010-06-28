@@ -1,0 +1,36 @@
+<html>
+<head>
+<script type="text/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".address").each(function () {
+            var curId = $(this).attr('id');
+            updateStatus(curId);
+        });
+    });
+
+    function updateStatus(attrId) {
+        address = attrId.replace('ip_', '');
+        address = address.replace(/_/g, '.');
+        $.ajax({
+            url: '{% url networkaddress-ping-url %}' + address + '/ping/',
+            success: function(response) {
+                $('#' + attrId).html(response);
+            }
+        });
+    }
+
+</script>
+</head>
+
+{% block menu %}
+<ul>
+    <li><a href="{% url networkaddress-displaytop %}">Network address management</a></li>
+    <li><a href="{% url classrule-displaytop %}">Class rules management</a></li>
+    <li><a href="{% url dhcp-conf-generate %}">Generate DHCP configuration</a></li>
+</ul>
+{% endblock %}
+<hr/>
+{% block contents %}
+{% endblock %}
+</html>

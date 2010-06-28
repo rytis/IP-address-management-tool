@@ -1,0 +1,35 @@
+{% autoescape off %}
+ignore client-updates;
+ddns-update-style interim;
+
+{% if class_rules %}
+    {% for cr in class_rules %}
+        # {{cr.description }}
+        class "class_rule_{{ cr.id }}" {
+            {{ cr.rule }};
+        }
+    {% endfor %}
+{% endif %}
+
+{% if networks %}
+    {% for net in networks %}
+        shared-network network_{{ net.dhcp_net.id }} {
+            subnet {{ net.dhcp_net.physical_net.address }} netmask {{ net.dhcp_net.physical_net.get_netmask }} {
+                option routers {{ net.dhcp_net.router }};
+                option domain-name-servers {{ net.dhcp_net.dns_server.address }};
+                option domain-name {{ net.dhcp_net.domain_name.name }};
+
+                {% if net.pools %}
+                    {% for pool in net.pools %}
+                        pool {
+                            allow members of "class_rule_{{ pool.class_rule.id }}";
+                            range {{ pool.range_start }} {{ pool.range_finish }};
+                        }
+                    {% endfor %}
+                {% endif %}
+            }
+        }
+    {% endfor %}
+{% endif %}
+
+{% endautoescape %}

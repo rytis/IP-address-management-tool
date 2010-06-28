@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block contents %}
+<h1>DHCP details for {{ dhcp_net.physical_net.address }}/{{ dhcp_net.physical_net.network_size }} network</h1>
+<h2><a href="{% url networkaddress-display dhcp_net %}">Go back to network details</a></h2>
+<ul>
+    <li>Router: {{ dhcp_net.router }}
+    <li>DNS: {{ dhcp_net.dns_server }}
+    <li>Domain: {{ dhcp_net.domain_name }}
+</ul>
+<p>( <a href="{% url dhcpnetwork-modify dhcp_net %}">modify</a> | <a href="{% url dhcpnetwork-delete dhcp_net %}">delete</a> )</p>
+{% if dhcp_pools %}
+    <h3>Following DHCP pools are available:</h3>
+    <ul>
+    {% for pool in dhcp_pools %}
+        <li>{{ pool.range_start }} - {{ pool.range_finish }} ( <a href="{% url dhcpaddresspool-delete pool %}">delete</a> )</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h3>There are no DHCP pools defined</h3>
+{% endif %}
+<p>
+( <a href="{% url dhcpnetwork-addpool dhcp_net %}">add new pool</a> )
+</p>
+{% if class_rules %}
+    <h3>Following Classification Rules are defined:</h3>
+    <ul>
+    {% for rule in class_rules %}
+        <li>{{ rule }} ( <a href="{% url classrule-display rule.id %}">details</a> | <a href="{% url classrule-modify rule.id %}">modify</a> | <a href="{% url classrule-delete rule.id %}">delete</a> )</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h3>There are no Classification Rules defined</h3>
+{% endif %}
+( <a href="{% url classrule-add %}">add new rule</a> )
+{% endblock %}
